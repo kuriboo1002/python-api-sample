@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "employee"
+version = "0.1.0"
+description = ""
+authors = ["kuriboo1002 <kurihara-h@gicloud.co.jp>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.114.2"
+uvicorn = "^0.30.6"
+sqlalchemy = "^2.0.35"
+starlette = "^0.38.5"
+pymysql = "^1.1.2"
+cryptography = "^42.0.5"
+pytest = "^8.4.2"
+python-dotenv = "^1.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+httpx = "^0.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,66 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+.pytest_cache/
+
+# Virtualenv
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# MySQL
+*.db
+*.sqlite3
+db-data/
+mysql-data/
+*.pid
+*.sock
+
+# Docker
+*.pid
+*.sock
+*.tar
+*.gz
+
+# VSCode
+.vscode/
+.history/
+
+# AI系
+.serena
+.clinerules
+
+# 環境変数・秘密情報
+.env
+.env.*
+!.env.sample
+
+# その他
+*.swp
+*.swo
+*.bak
+*.tmp
+*.orig
+*.old
+*.rej
+*.~*
+
+# バックアップ
+bkup*/
