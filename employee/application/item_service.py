@@ -1,9 +1,9 @@
 from typing import Optional
-from employee.infrastructure.item_repository import ItemRepositoryImpl
+from employee.application.item_schemas import ItemResponse
 
 class ItemService:
-    def __init__(self):
-        self.repo = ItemRepositoryImpl()
+    def __init__(self, repo):
+        self.repo = repo
 
 
     def get_item(self, item_id: int) -> Optional[ItemResponse]:
@@ -24,3 +24,7 @@ class ItemService:
 
     def delete_item(self, item_id: int) -> bool:
         return self.repo.delete(item_id)
+
+    def create_item(self, req) -> ItemResponse:
+        item = self.repo.create(req)
+        return ItemResponse(id=item.id, name=item.name, description=item.description)

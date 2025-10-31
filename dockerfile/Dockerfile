@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update && pip install poetry
 
-COPY . /app
+COPY ./poetry.lock ./pyproject.toml /app/
 
 RUN poetry self add poetry-plugin-export
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
@@ -13,8 +13,8 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+COPY ./employee /app/
 COPY --from=builder /app/requirements.txt /app/
-COPY --from=builder /app /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
