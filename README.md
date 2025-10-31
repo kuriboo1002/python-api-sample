@@ -109,11 +109,12 @@ Swagger UI（APIドキュメント画面）は
 
 2. 以下コマンドを実行してmodels.pyを自動生成  
    ```
-   sqlacodegen mysql+pymysql://root:root@localhost/employee_db --outfile employee/domain/generated_models/models.py
+   sqlacodegen mysql+pymysql://root:root@localhost/employee_db --outfile employee/infrastructure/generated_models/models.py
    ```
 
 3. 自動生成されたmodels.pyは直接編集せず、  
    必要な拡張はラッパークラス（例：employee/domain/item.py等）で行ってください。
+   ※自動生成ファイルは employee/infrastructure/generated_models/models.py に配置されます。
 
 ## データが投入できない場合の対処
 

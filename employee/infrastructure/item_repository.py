@@ -1,37 +1,21 @@
 from employee.domain.item import ItemRepository
-from employee.domain.generated_models.models import Items as DBItem
+from employee.infrastructure.generated_models.models import Items as DBItem
 
 class ItemRepositoryImpl(ItemRepository):
-    def __init__(self, db):
-        self.db = db
+    def __init__(self, adapter):
+        self.adapter = adapter
 
     def get_by_id(self, item_id: int) -> DBItem | None:
-        return self.db.query(DBItem).filter(DBItem.id == item_id).first()
+        return self.adapter.get_by_id(item_id)
 
     def get_all(self) -> list[DBItem]:
-        return self.db.query(DBItem).all()
+        return self.adapter.get_all()
 
     def update(self, item_id: int, req) -> DBItem | None:
-        item = self.db.query(DBItem).filter(DBItem.id == item_id).first()
-        if item is None:
-            return None
-        item.name = req.name
-        item.description = req.description
-        self.db.commit()
-        self.db.refresh(item)
-        return item
+        return self.adapter.update(item_id, req)
 
     def delete(self, item_id: int) -> bool:
-        item = self.db.query(DBItem).filter(DBItem.id == item_id).first()
-        if item is None:
-            return False
-        self.db.delete(item)
-        self.db.commit()
-        return True
+        return self.adapter.delete(item_id)
 
     def create(self, req) -> DBItem:
-        item = DBItem(name=req.name, description=req.description)
-        self.db.add(item)
-        self.db.commit()
-        self.db.refresh(item)
-        return item
+        return self.adapter.create(req)
