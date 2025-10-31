@@ -15,6 +15,19 @@ docker compose up --build
 
 3. ブラウザで http://localhost:8000/items にアクセスすると商品一覧が取得できます。
 
+## OpenAPI定義
+
+FastAPIはOpenAPI（Swagger）定義を自動生成します。  
+以下URLで取得できます。
+
+- `http://localhost:8000/openapi.json`  
+  ```bash
+  curl http://localhost:8000/openapi.json
+  ```
+
+Swagger UI（APIドキュメント画面）は  
+- `http://localhost:8000/docs`
+
 ## APIエンドポイント
 
 - `GET /`  
