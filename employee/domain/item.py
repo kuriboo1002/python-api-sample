@@ -1,27 +1,20 @@
-from __future__ import annotations
-from typing import Optional
-
 from abc import ABC, abstractmethod
+from typing import Optional
+from employee.domain.generated_models.models import Items as DBItem
 
 class ItemRepository(ABC):
     @abstractmethod
-    def get_by_id(self, item_id: int) -> Optional[CustomItem]:
+    def get_by_id(self, item_id: int) -> Optional[DBItem]:
         pass
 
     @abstractmethod
-    def get_all(self) -> list[CustomItem]:
+    def get_all(self) -> list[DBItem]:
         pass
 
     @abstractmethod
-    def update(self, item_id: int, name: str, description: str) -> Optional[CustomItem]:
+    def update(self, item_id: int, req) -> Optional[DBItem]:
         pass
 
     @abstractmethod
     def delete(self, item_id: int) -> bool:
         pass
-
-from employee.domain.generated_models.models import Items as BaseItem
-
-class CustomItem(BaseItem):
-    # 追加メソッドやプロパティをここに記述
-    pass

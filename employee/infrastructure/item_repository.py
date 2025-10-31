@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base
-from employee.domain.item import CustomItem, ItemRepository
+from employee.domain.item import ItemRepository
 from employee.domain.generated_models.models import Items as DBItem
 
 DB_USER = os.getenv("DB_USER", "user")
@@ -20,38 +20,30 @@ Base = declarative_base()
 Base.metadata.create_all(bind=engine)
 
 class ItemRepositoryImpl(ItemRepository):
-    def get_by_id(self, item_id: int) -> CustomItem | None:
+    def get_by_id(self, item_id: int) -> DBItem | None:
         db = SessionLocal()
         item = db.query(DBItem).filter(DBItem.id == item_id).first()
         db.close()
-        if item is None:
-            return None
-        data = {k: v for k, v in item.__dict__.items() if k != "_sa_instance_state"}
-        return CustomItem(**data)
+        return item
 
-    def get_all(self) -> list[CustomItem]:
+    def get_all(self) -> list[DBItem]:
         db = SessionLocal()
         items = db.query(DBItem).all()
         db.close()
-        result = []
-        for i in items:
-            data = {k: v for k, v in i.__dict__.items() if k != "_sa_instance_state"}
-            result.append(CustomItem(**data))
-        return result
+        return items
 
-    def update(self, item_id: int, name: str, description: str) -> CustomItem | None:
+    def update(self, item_id: int, req) -> DBItem | None:
         db = SessionLocal()
         item = db.query(DBItem).filter(DBItem.id == item_id).first()
         if item is None:
             db.close()
             return None
-        item.name = name
-        item.description = description
+        item.name = req.name
+        item.description = req.description
         db.commit()
         db.refresh(item)
         db.close()
-        data = {k: v for k, v in item.__dict__.items() if k != "_sa_instance_state"}
-        return CustomItem(**data)
+        return item
 
     def delete(self, item_id: int) -> bool:
         db = SessionLocal()

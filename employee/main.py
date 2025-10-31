@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi import Body
 from employee.application.item_service import ItemService
+from employee.application.item_schemas import ItemUpdateRequest, ItemResponse
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,30 +15,24 @@ item_service = ItemService()
 async def read_root():
     return {"Hello": "World"}
 
-@app.get("/items/{item_id}")
+@app.get("/items/{item_id}", response_model=ItemResponse)
 def read_item(item_id: int):
     item = item_service.get_item(item_id)
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
-    return {"id": item.id, "name": item.name, "description": item.description}
+    return item
 
-@app.get("/items")
+@app.get("/items", response_model=list[ItemResponse])
 def read_items():
     items = item_service.get_items()
-    return JSONResponse(
-        content=[
-            {"id": i.id, "name": i.name, "description": i.description}
-            for i in items
-        ],
-        media_type="application/json; charset=utf-8"
-    )
+    return items
 
-@app.put("/items/{item_id}")
-def update_item(item_id: int, name: str = Body(...), description: str = Body(...)):
-    item = item_service.update_item(item_id, name, description)
+@app.put("/items/{item_id}", response_model=ItemResponse)
+def update_item(item_id: int, req: ItemUpdateRequest):
+    item = item_service.update_item(item_id, req)
     if item is None:
         raise HTTPException(status_code=404, detail="Item not found")
-    return {"id": item.id, "name": item.name, "description": item.description}
+    return item
 
 @app.delete("/items/{item_id}")
 def delete_item(item_id: int):
