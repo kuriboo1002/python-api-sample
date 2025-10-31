@@ -38,6 +38,32 @@ docker compose up --build
   curl http://localhost:8000/items/1
   ```
 
+- `POST /items`  
+  商品情報（name, description）を新規作成します。  
+  リクエストBody:  
+  ```
+  {
+    "name": "商品名",
+    "description": "説明"
+  }
+  ```
+  ```bash
+  curl -X POST "http://localhost:8000/items" \
+    -H "Content-Type: application/json" \
+    -d '{"name": "商品名", "description": "説明"}'
+  ```
+  レスポンス例:
+  ```
+  {
+    "id": 101,
+    "name": "商品名",
+    "description": "説明"
+  }
+  ```
+  バリデーション:
+  - name: 必須（空不可）
+  - description: 255文字以内
+
 - `PUT /items/{item_id}`  
   商品情報（name, description）を更新します。  
   リクエストBody:  
@@ -52,6 +78,9 @@ docker compose up --build
     -H "Content-Type: application/json" \
     -d '{"name": "新しい商品名", "description": "新しい説明"}'
   ```
+  バリデーション:
+  - name: 必須（空不可）
+  - description: 255文字以内
 
 - `DELETE /items/{item_id}`  
   商品情報を削除します。
@@ -59,7 +88,6 @@ docker compose up --build
   ```bash
   curl -X DELETE http://localhost:8000/items/1
   ```
-
 
 ## models.py自動生成手順
 
