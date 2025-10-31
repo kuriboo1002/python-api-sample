@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import MagicMock
-from employee.application.item_service import ItemService
-from employee.application.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
+from employee.service.item_service import ItemService
+from employee.service.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
 from employee.domain.generated_models.models import Items as DBItem
 
 @pytest.fixture

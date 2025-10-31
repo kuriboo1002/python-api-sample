@@ -1,5 +1,5 @@
 from typing import Optional
-from employee.application.item_schemas import ItemResponse
+from employee.service.item_schemas import ItemResponse
 
 class ItemService:
     def __init__(self, repo):

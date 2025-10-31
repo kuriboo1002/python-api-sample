@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
-from employee.application.item_service import ItemService
-from employee.application.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
+from employee.service.item_service import ItemService
+from employee.service.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
 from employee.infrastructure.item_repository import ItemRepositoryImpl
 from employee.infrastructure.database import SessionLocal
 
