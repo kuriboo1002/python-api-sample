@@ -36,8 +36,8 @@ class ItemRepositoryAdapter(ItemRepositoryAdapterInterface):
         item = self.db.query(DBItem).filter(DBItem.id == item_id).first()
         if item is None:
             return None
-        item.name = req.name
-        item.description = req.description
+        item.name = req.name.value if hasattr(req.name, "value") else req.name
+        item.description = req.description.value if hasattr(req.description, "value") else req.description
         self.db.commit()
         self.db.refresh(item)
         return item
@@ -51,7 +51,10 @@ class ItemRepositoryAdapter(ItemRepositoryAdapterInterface):
         return True
 
     def create(self, req) -> DBItem:
-        item = DBItem(name=req.name, description=req.description)
+        item = DBItem(
+            name=req.name.value if hasattr(req.name, "value") else req.name,
+            description=req.description.value if hasattr(req.description, "value") else req.description
+        )
         self.db.add(item)
         self.db.commit()
         self.db.refresh(item)

@@ -18,13 +18,13 @@ class ItemRepositoryImpl(ItemRepository):
         dbitems = self.adapter.get_all()
         return [dbitem_to_item(dbitem) for dbitem in dbitems]
 
-    def update(self, item_id: int, req) -> Item | None:
+    def update(self, item_id: int, req: Item) -> Item | None:
         dbitem = self.adapter.update(item_id, req)
         return dbitem_to_item(dbitem)
 
     def delete(self, item_id: int) -> bool:
         return self.adapter.delete(item_id)
 
-    def create(self, req) -> Item:
+    def create(self, req: Item) -> Item:
         dbitem = self.adapter.create(req)
         return dbitem_to_item(dbitem)

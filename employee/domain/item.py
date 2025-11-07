@@ -19,9 +19,13 @@ class ItemRepository(ABC):
         pass
 
     @abstractmethod
-    def update(self, item_id: int, req) -> Optional[Item]:
+    def update(self, item_id: int, req: Item) -> Optional[Item]:
         pass
 
     @abstractmethod
     def delete(self, item_id: int) -> bool:
+        pass
+
+    @abstractmethod
+    def create(self, req: Item) -> bool:
         pass
