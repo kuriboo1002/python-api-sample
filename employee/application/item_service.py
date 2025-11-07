@@ -11,18 +11,18 @@ class ItemService:
         item = self.repo.get_by_id(item_id)
         if item is None:
             return None
-        return ItemResponse(id=item.id, name=item.name, description=item.description)
+        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
 
     def get_items(self) -> list[ItemResponse]:
         items = self.repo.get_all()
-        return [ItemResponse(id=i.id, name=i.name, description=i.description) for i in items]
+        return [ItemResponse(id=i.id, name=i.name.value, description=i.description.value) for i in items]
 
     def update_item(self, item_id: int, req) -> Optional[ItemResponse]:
         _ = ItemFactory.create(req.name, req.description)  # バリデーションのみ実行
         item = self.repo.update(item_id, req)
         if item is None:
             return None
-        return ItemResponse(id=item.id, name=item.name, description=item.description)
+        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
 
     def delete_item(self, item_id: int) -> bool:
         return self.repo.delete(item_id)
@@ -30,8 +30,8 @@ class ItemService:
     def create_item(self, req) -> ItemResponse:
         items = self.repo.get_all()
         # ItemFactoryで生成（バリデーション含む）
-        if ItemDomainService.is_duplicate_name(req.name, [ItemFactory.create(i.name, i.description)[0] for i in items]):
+        if ItemDomainService.is_duplicate_name(req.name, [ItemFactory.create(i.name.value, i.description.value)[0] for i in items]):
             raise ValueError("Duplicate item name is not allowed")
         _ = ItemFactory.create(req.name, req.description)
         item = self.repo.create(req)
-        return ItemResponse(id=item.id, name=item.name, description=item.description)
+        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
