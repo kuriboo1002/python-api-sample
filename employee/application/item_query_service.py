@@ -8,9 +8,8 @@ class ItemQueryService:
         item = self.repo.get_by_id(item_id)
         if item is None:
             return None
-        # ItemエンティティからDTOへ変換
-        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
+        return ItemResponse.from_item(item)
 
     def get_items(self) -> list[ItemResponse]:
         items = self.repo.get_all()
-        return [ItemResponse(id=i.id, name=i.name.value, description=i.description.value) for i in items]
+        return [ItemResponse.from_item(i) for i in items]

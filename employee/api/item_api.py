@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from employee.application.item_command_service import ItemCommandService
 from employee.application.item_query_service import ItemQueryService
 from employee.application.item_schemas import ItemCreateRequest, ItemUpdateRequest, ItemResponse
-
 from employee.infrastructure.database import SessionLocal
+from employee.infrastructure.item_repository_adapter import ItemRepositoryAdapter
+from employee.infrastructure.item_repository import ItemRepositoryImpl
 
 router = APIRouter()
 
@@ -15,15 +16,11 @@ def get_db():
         db.close()
 
 def get_command_service(db=Depends(get_db)):
-    from employee.infrastructure.item_repository_adapter import ItemRepositoryAdapter
-    from employee.infrastructure.item_repository import ItemRepositoryImpl
     adapter = ItemRepositoryAdapter(db)
     repo = ItemRepositoryImpl(adapter)
     return ItemCommandService(repo)
 
 def get_query_service(db=Depends(get_db)):
-    from employee.infrastructure.item_repository_adapter import ItemRepositoryAdapter
-    from employee.infrastructure.item_repository import ItemRepositoryImpl
     adapter = ItemRepositoryAdapter(db)
     repo = ItemRepositoryImpl(adapter)
     return ItemQueryService(repo)

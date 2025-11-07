@@ -6,13 +6,13 @@ class ItemCommandService:
 
     def create_item(self, req: ItemCreateRequest) -> ItemResponse:
         item = self.repo.create(req)
-        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
+        return ItemResponse.from_item(item)
 
     def update_item(self, item_id: int, req: ItemUpdateRequest) -> ItemResponse:
         item = self.repo.update(item_id, req)
         if item is None:
             return None
-        return ItemResponse(id=item.id, name=item.name.value, description=item.description.value)
+        return ItemResponse.from_item(item)
 
     def delete_item(self, item_id: int) -> bool:
         return self.repo.delete(item_id)

@@ -41,3 +41,11 @@ class ItemResponse(BaseModel):
     id: int
     name: str
     description: str
+
+    @classmethod
+    def from_item(cls, item):
+        return cls(
+            id=item.id,
+            name=item.name.value if hasattr(item.name, "value") else item.name,
+            description=item.description.value if hasattr(item.description, "value") else item.description
+        )
