@@ -1,4 +1,4 @@
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /app
 
@@ -9,7 +9,7 @@ COPY ./poetry.lock ./pyproject.toml /app/
 RUN poetry self add poetry-plugin-export
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
