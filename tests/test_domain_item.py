@@ -1,7 +1,7 @@
 import pytest
-from employee.domain.item import Item
-from employee.domain.value_objects import Name
-from employee.domain.value_objects import Description
+from src.domain.item import Item
+from src.domain.value_objects import Name
+from src.domain.value_objects import Description
 
 
 def test_domain_item_entity_validation_success():

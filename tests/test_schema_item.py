@@ -1,5 +1,5 @@
 import pytest
-from employee.application.item_schemas import ItemUpdateRequest, ItemCreateRequest
+from src.application.item_schemas import ItemUpdateRequest, ItemCreateRequest
 
 def test_schema_item_update_request_validation_success():
     req = ItemUpdateRequest(name="valid", description="desc")

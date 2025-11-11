@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
-from employee.domain.value_objects import Name, Description
+from src.domain.value_objects import Name, Description
 
 class Item:
     def __init__(self, id: int = None, name: str = None, description: str = None, **kwargs):

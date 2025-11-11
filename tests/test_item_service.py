@@ -1,9 +1,9 @@
 import pytest
 from unittest.mock import MagicMock
-from employee.application.item_command_service import ItemCommandService
-from employee.application.item_query_service import ItemQueryService
-from employee.application.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
-from employee.domain.item import Item
+from src.application.item_command_service import ItemCommandService
+from src.application.item_query_service import ItemQueryService
+from src.application.item_schemas import ItemUpdateRequest, ItemResponse, ItemCreateRequest
+from src.domain.item import Item
 
 # サービス層（ユースケース）テスト
 @pytest.fixture

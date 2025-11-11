@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
-from employee.application.item_command_service import ItemCommandService
-from employee.application.item_query_service import ItemQueryService
-from employee.application.item_schemas import ItemCreateRequest, ItemUpdateRequest, ItemResponse
-from employee.infrastructure.database import SessionLocal
-from employee.infrastructure.item_repository_adapter import ItemRepositoryAdapter
-from employee.infrastructure.item_repository import ItemRepositoryImpl
+from src.application.item_command_service import ItemCommandService
+from src.application.item_query_service import ItemQueryService
+from src.application.item_schemas import ItemCreateRequest, ItemUpdateRequest, ItemResponse
+from src.infrastructure.database import SessionLocal
+from src.infrastructure.item_repository_adapter import ItemRepositoryAdapter
+from src.infrastructure.item_repository import ItemRepositoryImpl
 
 router = APIRouter()
 

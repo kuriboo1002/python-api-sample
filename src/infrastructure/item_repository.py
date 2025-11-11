@@ -1,5 +1,5 @@
-from employee.domain.item import ItemRepository, Item
-from employee.infrastructure.generated_models.models import Items as DBItem
+from src.domain.item import ItemRepository, Item
+from src.infrastructure.generated_models.models import Items as DBItem
 
 def dbitem_to_item(dbitem: DBItem) -> Item:
     if dbitem is None:

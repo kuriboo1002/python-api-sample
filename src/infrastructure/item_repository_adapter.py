@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from employee.infrastructure.generated_models.models import Items as DBItem
+from src.infrastructure.generated_models.models import Items as DBItem
 
 class ItemRepositoryAdapterInterface(ABC):
     @abstractmethod

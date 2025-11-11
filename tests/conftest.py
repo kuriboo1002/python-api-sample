@@ -1,7 +1,7 @@
 import sys
 from unittest.mock import MagicMock
 
-from employee.infrastructure.item_repository_adapter import ItemRepositoryAdapterInterface
+from src.infrastructure.item_repository_adapter import ItemRepositoryAdapterInterface
 
 class MockItemRepositoryAdapter(ItemRepositoryAdapterInterface):
     def get_by_id(self, item_id: int):
