@@ -2,7 +2,7 @@ version: '3.8'
 services:
   db:
     image: mysql:8.0
-    container_name: employee-mysql
+    container_name: item-mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}

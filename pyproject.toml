@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "employee"
+name = "item"
 version = "0.1.0"
 description = ""
 authors = ["kuriboo1002 <kurihara-h@gicloud.co.jp>"]

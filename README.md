@@ -109,12 +109,12 @@ Swagger UI（APIドキュメント画面）は
 
 2. 以下コマンドを実行してmodels.pyを自動生成  
    ```
-   sqlacodegen mysql+pymysql://root:root@localhost/employee_db --outfile employee/infrastructure/generated_models/models.py
+   sqlacodegen mysql+pymysql://root:root@localhost/item_db --outfile src/infrastructure/generated_models/models.py
    ```
 
 3. 自動生成されたmodels.pyは直接編集せず、  
-   必要な拡張はラッパークラス（例：employee/domain/item.py等）で行ってください。
-   ※自動生成ファイルは employee/infrastructure/generated_models/models.py に配置されます。
+   必要な拡張はラッパークラス（例：src/domain/item.py等）で行ってください。
+   ※自動生成ファイルは src/infrastructure/generated_models/models.py に配置されます。
 
 ## データが投入できない場合の対処
 
@@ -125,7 +125,7 @@ MySQLの初期化SQL（init.sql）が反映されない場合、既存のDBボ�
 
 ```bash
 docker compose down
-docker volume rm employee_db-data
+docker volume rm item_db-data
 ```
 
 2. 再度起動
