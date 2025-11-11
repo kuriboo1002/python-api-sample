@@ -24,6 +24,7 @@ def test_query_service_get_item_found(query_service, mock_repo):
     assert isinstance(result, ItemResponse)
     assert result.id == 1
     assert result.name == "item1"
+    assert result.description == "desc"
 
 def test_query_service_get_item_not_found(query_service, mock_repo):
     mock_repo.get_by_id.return_value = None
@@ -40,7 +41,11 @@ def test_query_service_get_items_returns_list(query_service, mock_repo):
     assert len(result) == 2
     assert all(isinstance(item, ItemResponse) for item in result)
     assert result[0].id == 1
+    assert result[0].name == "item1"
+    assert result[0].description == "desc"
     assert result[1].id == 2
+    assert result[1].name == "item2"
+    assert result[1].description == "desc2"
 
 def test_query_service_get_items_empty(query_service, mock_repo):
     mock_repo.get_all.return_value = []
@@ -54,6 +59,7 @@ def test_command_service_update_item_success(command_service, mock_repo):
     assert isinstance(result, ItemResponse)
     assert result.id == 1
     assert result.name == "updated"
+    assert result.description == "desc"
 
 def test_command_service_update_item_not_found(command_service, mock_repo):
     mock_repo.update.return_value = None
@@ -79,6 +85,7 @@ def test_command_service_create_item_success(command_service, mock_repo):
     assert isinstance(result, ItemResponse)
     assert result.id == 1
     assert result.name == "newitem"
+    assert result.description == "desc"
 
 def test_command_service_create_item_duplicate_name(command_service, mock_repo):
     mock_repo.get_all.return_value = [Item(id=1, name="newitem", description="desc")]
