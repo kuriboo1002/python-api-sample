@@ -1,5 +1,5 @@
-USE employee_db;
-ALTER DATABASE employee_db CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+USE item_db;
+ALTER DATABASE item_db CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 CREATE TABLE IF NOT EXISTS items (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
