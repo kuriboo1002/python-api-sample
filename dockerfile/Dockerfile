@@ -7,7 +7,7 @@ RUN apt-get update && pip install poetry
 COPY ./poetry.lock ./pyproject.toml /app/
 
 RUN poetry self add poetry-plugin-export
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev
 
 FROM python:3.12-slim
 
