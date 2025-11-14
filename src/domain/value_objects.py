@@ -8,6 +8,7 @@ class Name:
                 raise ValueError(f"name must not contain forbidden word: {word}")
         self.value = value
 
+
 class Description:
     def __init__(self, value: str):
         if len(value) > 255:

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 
+
 class ItemCreateRequest(BaseModel):
     name: str
     description: Optional[str] = None
@@ -18,6 +19,7 @@ class ItemCreateRequest(BaseModel):
         if v is not None and len(v) > 255:
             raise ValueError("descriptionは255文字以内で入力してください")
         return v
+
 
 class ItemUpdateRequest(BaseModel):
     name: str
@@ -37,6 +39,7 @@ class ItemUpdateRequest(BaseModel):
             raise ValueError("descriptionは255文字以内で入力してください")
         return v
 
+
 class ItemResponse(BaseModel):
     id: int
     name: str
@@ -47,5 +50,7 @@ class ItemResponse(BaseModel):
         return cls(
             id=item.id,
             name=item.name.value if hasattr(item.name, "value") else item.name,
-            description=item.description.value if hasattr(item.description, "value") else item.description
+            description=item.description.value
+            if hasattr(item.description, "value")
+            else item.description,
         )

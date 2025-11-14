@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from src.infrastructure.generated_models.models import Items as DBItem
 
+
 class ItemRepositoryAdapterInterface(ABC):
     @abstractmethod
     def get_by_id(self, item_id: int) -> DBItem | None:
@@ -22,6 +23,7 @@ class ItemRepositoryAdapterInterface(ABC):
     def create(self, req) -> DBItem:
         pass
 
+
 class ItemRepositoryAdapter(ItemRepositoryAdapterInterface):
     def __init__(self, db):
         self.db = db
@@ -37,7 +39,11 @@ class ItemRepositoryAdapter(ItemRepositoryAdapterInterface):
         if item is None:
             return None
         item.name = req.name.value if hasattr(req.name, "value") else req.name
-        item.description = req.description.value if hasattr(req.description, "value") else req.description
+        item.description = (
+            req.description.value
+            if hasattr(req.description, "value")
+            else req.description
+        )
         self.db.commit()
         self.db.refresh(item)
         return item
@@ -53,7 +59,9 @@ class ItemRepositoryAdapter(ItemRepositoryAdapterInterface):
     def create(self, req) -> DBItem:
         item = DBItem(
             name=req.name.value if hasattr(req.name, "value") else req.name,
-            description=req.description.value if hasattr(req.description, "value") else req.description
+            description=req.description.value
+            if hasattr(req.description, "value")
+            else req.description,
         )
         self.db.add(item)
         self.db.commit()

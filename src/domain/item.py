@@ -3,11 +3,15 @@ from typing import Optional
 
 from src.domain.value_objects import Name, Description
 
+
 class Item:
-    def __init__(self, id: int = None, name: str = None, description: str = None, **kwargs):
+    def __init__(
+        self, id: int = None, name: str = None, description: str = None, **kwargs
+    ):
         self.id = id
         self.name = Name(name) if name is not None else None
         self.description = Description(description) if description is not None else None
+
 
 class ItemRepository(ABC):
     @abstractmethod

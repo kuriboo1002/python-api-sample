@@ -1,6 +1,11 @@
-from src.application.item_schemas import ItemCreateRequest, ItemUpdateRequest, ItemResponse
+from src.application.item_schemas import (
+    ItemCreateRequest,
+    ItemUpdateRequest,
+    ItemResponse,
+)
 from src.domain.item_domain_service import ItemDomainService
 from src.domain.item import Item
+
 
 class ItemCommandService:
     def __init__(self, repo):
@@ -11,7 +16,11 @@ class ItemCommandService:
 
     def _normalize_item_for_duplicate(self, item):
         name = item.name.value if hasattr(item.name, "value") else item.name
-        description = item.description.value if hasattr(item.description, "value") else item.description
+        description = (
+            item.description.value
+            if hasattr(item.description, "value")
+            else item.description
+        )
         return Item(name=name, description=description)
 
     def create_item(self, req: ItemCreateRequest) -> ItemResponse:
