@@ -1,36 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
+
 from src.application.item_command_service import ItemCommandService
 from src.application.item_query_service import ItemQueryService
 from src.application.item_schemas import (
     ItemCreateRequest,
-    ItemUpdateRequest,
     ItemResponse,
+    ItemUpdateRequest,
 )
-from src.infrastructure.database import SessionLocal
-from src.infrastructure.item_repository_adapter import ItemRepositoryAdapter
-from src.infrastructure.item_repository import ItemRepositoryImpl
+from src.dependencies import get_command_service, get_query_service
 
 router = APIRouter()
-
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-def get_command_service(db=Depends(get_db)):
-    adapter = ItemRepositoryAdapter(db)
-    repo = ItemRepositoryImpl(adapter)
-    return ItemCommandService(repo)
-
-
-def get_query_service(db=Depends(get_db)):
-    adapter = ItemRepositoryAdapter(db)
-    repo = ItemRepositoryImpl(adapter)
-    return ItemQueryService(repo)
 
 
 @router.post("/items", response_model=ItemResponse)
